@@ -6,7 +6,7 @@ target_address = None
 nearby_devices = discover_devices()
 
 for address in nearby_devices:
-    if target_name == lookup_name( address ):
+    if target_name == lookup_name(address):
         target_address = address
         break
 
