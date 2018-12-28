@@ -1,6 +1,6 @@
 from bluetooth import *
 
-target_name = ""
+target_name = "AmoSmartRF"
 target_address = None
 
 nearby_devices = discover_devices()
