@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 
     if(adapter_id < 0 || sock < 0)
     {
-        perror( "opening socket" );
+        perror("opening socket");
         exit(1); 
     }
 
@@ -29,16 +29,16 @@ int main(int argc, char **argv)
     max_rsp = 255;
     flags = IREQ_CACHE_FLUSH;
     
-    devices = (inquiry_info *)malloc(max_rsp * sizeof(inquiry_info));
+    devices = (inquiry_info*)malloc(max_rsp * sizeof(inquiry_info));
     num_rsp = hci_inquiry(adapter_id, len, max_rsp, NULL, &devices, flags);
 
     if(num_rsp < 0) perror("hci_inquiry");
 
     for(i = 0; i < num_rsp; i++) 
     { 
-        ba2str(&(devices+i)−>bdaddr, addr);
+        ba2str((devices+i)−>bdaddr, addr);
         memset(name, 0, sizeof(name));
-        if(0 != hci_read_remote_name(sock, &(devices+i)−>bdaddr, sizeof(name) , name, 0))
+        if(0 != hci_read_remote_name(sock, (devices+i)−>bdaddr, sizeof(name) , name, 0))
         {
             strcpy(name, "[unknown]");
         }
