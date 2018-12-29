@@ -13,13 +13,13 @@ int main(int argc, char **argv)
     int adapter_id, sock, len, flags;
     int i;
 
-    charaddr[19] = {0};
-    charname[248] = {0};
+    char addr[19] = {0};
+    char name[248] = {0};
 
-    adapter_id= hci get route(NULL);
-    sock = hciopendev(adapter_id);
+    adapter_id= hci_get_route(NULL);
+    sock = hci_open_dev(adapter_id);
 
-    if (adapter_id < 0 || sock < 0) 
+    if(adapter_id < 0 || sock < 0)
     {
         perror( "opening socket" );
         exit(1); 
@@ -31,12 +31,14 @@ int main(int argc, char **argv)
     
     devices = (inquiry_info *)malloc(max_rsp * sizeof(inquiry_info));
     num_rsp = hci_inquiry(adapter_id, len, max_rsp, NULL, &devices, flags);
+
     if(num_rsp < 0) perror("hci_inquiry");
-    for(i= 0;i<num_rsp;i++) 
+
+    for(i = 0; i < num_rsp; i++) 
     { 
         ba2str(&(devices+i)−>bdaddr, addr);
-        memset(name, 0 , sizeof(name)) ;
-        if(0 != hci read remote name (sock, &(devices+i)−>bdaddr, sizeof(name) , name, 0))
+        memset(name, 0, sizeof(name));
+        if(0 != hci_read_remote_name(sock, &(devices+i)−>bdaddr, sizeof(name) , name, 0))
         {
             strcpy(name, "[unknown]");
         }
