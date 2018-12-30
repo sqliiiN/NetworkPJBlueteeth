@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.0.8",
 	"appid": "wx907cf5711b6a6cd8",
-	"projectname": "ble",
+	"projectname": "bletest",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
