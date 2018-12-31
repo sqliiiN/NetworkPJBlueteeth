@@ -14,6 +14,16 @@ page {
   border-radius: 5px;
   width: auto;
 }
+
+.services_list{
+  height: 300px;
+  margin: 50px 5px;
+  margin-top: 50px;
+  border: 1px solid #EEE;
+  border-radius: 5px;
+  width: auto;
+}
+
 .device_item {
   border-bottom: 1px solid #EEE;
   padding: 10px;
