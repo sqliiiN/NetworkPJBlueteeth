@@ -16,9 +16,9 @@ page {
 }
 
 .services_list{
-  height: 300px;
-  margin: 50px 5px;
-  margin-top: 50px;
+  height: 430px;
+  margin: 20px 5px;
+  margin-top: 20px;
   border: 1px solid #EEE;
   border-radius: 5px;
   width: auto;
