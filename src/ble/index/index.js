@@ -327,4 +327,26 @@ Page({
     wx.closeBluetoothAdapter()
     this._discoveryStarted = false
   },
+
+  /** 
+   * 
+   * cleanupData: 关闭适配器.
+   */
+  cleanupData() {
+    this.setData({
+      devices: [],
+      connected: false,
+      chs: [],
+
+      // 蓝牙设备传输到手机上的信息
+      // 电池电量
+      batterylev: null,
+      // 温度整数和小数位
+      temperature_high: null,
+      temperature_low: null,
+      // 湿度整数和小数位
+      humidity_high: null,
+      humidity_low: null,
+      })
+  },
 })
