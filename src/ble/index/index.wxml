@@ -6,6 +6,11 @@ module.exports.len = function(arr) {
   arr = arr || []
   return arr.length
 }
+module.exports.distance = function(rssi){
+  rssi = Math.pow(10, ((-rssi)-70)/(10*2.0))
+  rssi = rssi.toFixed(2)
+  return rssi
+}
 </wxs>
 <button bindtap="openBluetoothAdapter">开始扫描</button>
 <button bindtap="stopBluetoothDevicesDiscovery">停止扫描</button>
@@ -20,6 +25,7 @@ module.exports.len = function(arr) {
    class="device_item"
    hover-class="device_item_hover">
     <view style="font-size: 16px; color: #333;">{{item.name}}</view>
+    <view style="font-size: 10px">距离: {{utils.distance(item.RSSI)}}m</view>
     <view style="font-size: 10px">信号强度: {{item.RSSI}}dBm ({{utils.max(0, item.RSSI + 100)}}%)</view>
     <view style="font-size: 10px">UUID: {{item.deviceId}}</view>
   </view>
@@ -32,17 +38,15 @@ module.exports.len = function(arr) {
     <button size="mini" bindtap="closeBLEConnection">断开连接</button>
     </view>
   </view>
+  <view>
+    <view style="font-size: 15px; margin-top: 10px;">电量: {{batterylev}}% </view>
+    <view style="font-size: 15px; margin-top: 10px;">温度: {{temperature_high}}.{{temperature_low}}摄氏度</view>
+    <view style="font-size: 15px; margin-top: 10px;">湿度: {{humidity_high}}.{{humidity_low}}%</view>
+  </view>
   <scroll-view class="services_list" scroll-y scroll-with-animation>
     <view wx:for="{{chs}}" wx:key="index" style="font-size: 12px; margin-top: 10px;">
       <view>特性UUID: {{item.uuid}}</view>
       <view>特性值: {{item.value}}</view>
     </view>
   </scroll-view>
-  <view>
-  <view style="font-size: 15px">距离: </view>
-  <view style="font-size: 15px; margin-top: 10px;">电量: </view>
-  <view style="font-size: 15px; margin-top: 10px;">温度: </view>
-  <view style="font-size: 15px; margin-top: 10px;">湿度: </view>
-  <view style="font-size: 15px; margin-top: 10px;">设备名称: </view>
-  </view>
 </view>
