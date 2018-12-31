@@ -27,6 +27,13 @@ Page({
     chs: [],
   },
 
+  // UUIDs of different services
+  reserveduuid:{
+    battery: "2A19",
+    sensor: "FFF6",
+    rename: "FFF7",
+  },
+
   /** 
    * openBluetoothAdapter: 开启蓝牙适配器后，搜索附近蓝牙设备.
    *    1. 蓝牙适配器开启成功, 开始搜寻附近的蓝牙外围设备;
@@ -103,9 +110,9 @@ Page({
   onBluetoothDeviceFound() {
     wx.onBluetoothDeviceFound((res) => {
       res.devices.forEach(device => {
-        if (!device.name && !device.localName) {
-          return
-        }
+        //if (!device.name && !device.localName) {
+          //return
+        //}
         const foundDevices = this.data.devices
         const idx = inArray(foundDevices, 'deviceId', device.deviceId)
         const data = {}
@@ -137,6 +144,8 @@ Page({
           name,
           deviceId,
         })
+        // TODO: 判断是否为"00B14C5D-AD30-8262-895F-CBFC46278D9C"
+        // 是则通过特别的规则获取服务
         this.getBLEDeviceServices(deviceId)
       }
     })
@@ -169,7 +178,7 @@ Page({
         for (let i = 0; i < res.services.length; i++) {
           if (res.services[i].isPrimary) {
             this.getBLEDeviceCharacteristics(deviceId, res.services[i].uuid)
-            return
+            //return
           }
         }
       }
@@ -238,24 +247,6 @@ Page({
         }
       }
       this.setData(data)
-    })
-  },
-
-  /** 
-   * writeBLECharacteristicValue: 向低功耗蓝牙设备特征值中写入二进制数据.
-   *    写数据需要有下列参数
-   *      设备ID, 服务ID, 特征值, 缓冲区
-   */
-  writeBLECharacteristicValue() {
-    // 向蓝牙设备发送一个0x00的16进制数据
-    let buffer = new ArrayBuffer(1)
-    let dataView = new DataView(buffer)
-    dataView.setUint8(0, Math.random() * 255 | 0)
-    wx.writeBLECharacteristicValue({
-      deviceId: this._deviceId,
-      serviceId: this._serviceId,
-      characteristicId: this._characteristicId,
-      value: buffer,
     })
   },
 
