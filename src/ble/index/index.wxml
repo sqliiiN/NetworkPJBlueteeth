@@ -15,6 +15,7 @@ module.exports.distance = function(rssi){
 <button bindtap="openBluetoothAdapter">开始扫描</button>
 <button bindtap="stopBluetoothDevicesDiscovery">停止扫描</button>
 <button bindtap="closeBluetoothAdapter">结束流程</button>
+<button bindtap="cleanupData">刷新</button>
 
 <view class="devices_summary">已发现 {{devices.length}} 个外围设备：</view>
 <scroll-view class="device_list" scroll-y scroll-with-animation>
@@ -39,9 +40,9 @@ module.exports.distance = function(rssi){
     </view>
   </view>
   <view>
-    <view style="font-size: 15px; margin-top: 10px;">电量: {{batterylev}}% </view>
-    <view style="font-size: 15px; margin-top: 10px;">温度: {{temperature_high}}.{{temperature_low}}摄氏度</view>
-    <view style="font-size: 15px; margin-top: 10px;">湿度: {{humidity_high}}.{{humidity_low}}%</view>
+    <view style="font-size: 12px; margin-top: 10px;">电量: {{batterylev}}% </view>
+    <view style="font-size: 12px; margin-top: 10px;">温度: {{temperature_high}}.{{temperature_low}}摄氏度</view>
+    <view style="font-size: 12px; margin-top: 10px;">湿度: {{humidity_high}}.{{humidity_low}}%</view>
   </view>
   <scroll-view class="services_list" scroll-y scroll-with-animation>
     <view wx:for="{{chs}}" wx:key="index" style="font-size: 12px; margin-top: 10px;">
